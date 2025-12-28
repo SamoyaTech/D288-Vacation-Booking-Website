@@ -15,7 +15,6 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 
 public class Division {
 
@@ -30,12 +29,19 @@ public class Division {
     @Column(name = "create_date")
     private Date create_date;
 
-    @Column(name = "last_update")
+    @Column(name = "last_update", updatable = false)
     private Date last_update;
 
-    @ManyToOne
-    @JoinColumn(name = "country_id", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "country_id", nullable = false, updatable = false, insertable = false)
     private Country country;
+
+    @Column(name="country_id", nullable = false)
+    private Long country_id;
+    public void setCountry(Country country) {
+        setCountry_id(country.getId());
+        this.country = country;
+    }
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "division")
     private Set<Customer> customers = new HashSet<>();

@@ -1,8 +1,8 @@
 package com.example.demo.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -16,7 +16,7 @@ import java.util.Set;
 @Table(name = "excursions")
 @Getter
 @Setter
-@AllArgsConstructor
+@NoArgsConstructor
 public class Excursion {
 
     @Id
@@ -33,7 +33,7 @@ public class Excursion {
     @Column(name = "image_url", nullable = false)
     private String image_URL;
 
-    @Column(name = "create_date")
+    @Column(name = "create_date", updatable = false)
     @CreationTimestamp
     private Date create_date;
 

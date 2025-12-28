@@ -38,7 +38,7 @@ public class Cart {
     @Enumerated(EnumType.STRING)
     private StatusType status;
 
-    @Column(name = "create_date")
+    @Column(name = "create_date", updatable = false)
     @CreationTimestamp
     private Date create_date;
 

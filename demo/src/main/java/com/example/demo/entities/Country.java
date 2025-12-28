@@ -27,7 +27,7 @@ public class Country {
     @Column(name = "country", nullable = false)
     private String country_name;
 
-    @Column(name = "create_date")
+    @Column(name = "create_date", updatable = false)
     @CreationTimestamp
     private Date create_Date;
 
@@ -35,7 +35,7 @@ public class Country {
     @UpdateTimestamp
     private Date last_update;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "country" )
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "country" )
     private Set<Division> divisions = new HashSet<>();
 }
 

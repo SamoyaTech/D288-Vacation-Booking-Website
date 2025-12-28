@@ -47,8 +47,8 @@ public class Customer {
     @UpdateTimestamp
     private Date last_Update;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "division_id", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "division_id", nullable = false, updatable = false)
     private Division division;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer")

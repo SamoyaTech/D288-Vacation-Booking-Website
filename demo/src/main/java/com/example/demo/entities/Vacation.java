@@ -26,7 +26,6 @@ public class Vacation {
     @Column(name = "vacation_id", nullable = false)
     private Long id;
 
-
     @Column(name = "vacation_title", nullable = false)
     private String vacation_title;
 
@@ -39,7 +38,7 @@ public class Vacation {
     @Column(name = "image_url", nullable = false)
     private String image_URL;
 
-    @Column(name = "create_date")
+    @Column(name = "create_date", updatable = false)
     @CreationTimestamp
     private Date create_date;
 

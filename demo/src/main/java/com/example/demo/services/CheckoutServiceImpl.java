@@ -10,6 +10,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
@@ -33,27 +34,29 @@ public class CheckoutServiceImpl implements CheckoutService {
         Cart cart = purchase.getCart();
         Customer customer = purchase.getCustomer();
 
+        //populate cart with cartItems
+        Set<CartItem> cartItems = purchase.getCartItems();
+
+
         //cart must not be null or empty
-        if (cart == null || cart.getCartItems() == null || cart.getCartItems().isEmpty()) {
-            return new  PurchaseResponse("Error: Cart is empty");
+        if (purchase.getCartItems() == null || purchase.getCartItems().isEmpty()) {
+            return new PurchaseResponse("Error: Cart is empty");
         }
 
         //generate tracking number
         String orderTrackingNumber = generateOrderTrackingNumber();
-
-        cart.setOrderTrackingNumber(orderTrackingNumber);
-        cart.setStatus(StatusType.ordered);
-        customer.add(cart);
-
-        //populate cart with cartItems
-        Set<CartItem> cartItems = purchase.getCartItems();
 
         cartItems.forEach(item -> {
             item.setCart(cart);
             cart.add(item);
         });
 
+        cart.setOrderTrackingNumber(orderTrackingNumber);
+        cart.setStatus(StatusType.ordered);
+        customer.add(cart);
+
         //save to database
+        cartRepository.save(cart);
         customerRepository.save(customer);
 
         //return a response
