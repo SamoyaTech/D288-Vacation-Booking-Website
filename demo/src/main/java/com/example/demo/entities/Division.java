@@ -38,6 +38,7 @@ public class Division {
 
     @Column(name="country_id", nullable = false)
     private Long country_id;
+
     public void setCountry(Country country) {
         setCountry_id(country.getId());
         this.country = country;

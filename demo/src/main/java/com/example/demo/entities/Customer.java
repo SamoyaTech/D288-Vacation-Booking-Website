@@ -10,8 +10,8 @@ import org.hibernate.annotations.UpdateTimestamp;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
-@NoArgsConstructor
 
+@NoArgsConstructor
 @Entity
 @Table(name = "customers")
 @Getter
@@ -48,7 +48,7 @@ public class Customer {
     private Date last_Update;
 
     @ManyToOne
-    @JoinColumn(name = "division_id", nullable = false, updatable = false)
+    @JoinColumn(name = "division_id", insertable = false, updatable = false)
     private Division division;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer")
@@ -56,5 +56,21 @@ public class Customer {
 
     public void add(Cart cart) {
         carts.add(cart);
+    }
+
+    //Constructor for Bootstrap
+    public Customer(String firstName,
+                    String lastName,
+                    String address,
+                    String postal_code,
+                    String phone,
+                    Division division) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.address = address;
+        this.postal_code = postal_code;
+        this.phone = phone;
+
+        setDivision(division);
     }
 }
