@@ -1,27 +1,43 @@
-<strong> **DO NOT DISTRIBUTE OR PUBLICLY POST SOLUTIONS TO THESE LABS. MAKE ALL FORKS OF THIS REPOSITORY WITH SOLUTION CODE PRIVATE. PLEASE REFER TO THE STUDENT CODE OF CONDUCT AND ETHICAL EXPECTATIONS FOR COLLEGE OF INFORMATION TECHNOLOGY STUDENTS FOR SPECIFICS. ** </strong>
-# WESTERN GOVERNORS UNIVERSITY 
-## D288 – BACK-END PROGRAMMING
-Welcome to Back-End Programming! This is an opportunity for students to develop object-oriented applications that can be integrated with relational databases, write code for object-oriented applications using Spring framework, and implements design patterns for object-oriented applications. 
-FOR SPECIFIC TASK INSTRUCTIONS AND REQUIREMENTS FOR THIS ASSESSMENT, PLEASE REFER TO THE COURSE PAGE.
-## BASIC INSTRUCTIONS
-For this project, you will be building your project using IntelliJ IDEA (Ultimate Edition) in a WGU-provided lab environment. You will be working with an existing MySQL database and Angular front-end, which are supplied for you in the lab environment. You will share this project to a private external GitLab repository and backup regularly. If you wish to work on it on your local machine, you will also need to download the Angular front-end application and create your own MySQL database. Use the links on your course page to install the integrated development environments (IDE), MySQL WorkBench, and IntelliJ IDEA, and pull the project from the lab environment.  
+# Vacation Booking App - Spring Boot Backend
+
+## Overview
+
+A travel agency's Angular vacation-booking front end was left running on a legacy, undocumented backend with no remaining support. This project rebuilds that backend from scratch on the Spring framework as a minimum viable product, without modifying the provided front end.
+
+The finished application allows a user browse available vacation packages, add a new customer directly from the front end (name, address, postal code, phone, country/division), select a party size and a set of add-on excursions for a trip, and complete checkout with the total price calculated dynamically based on party size and selected excursions. On checkout, the backend persists the customer, cart, cart items, and excursion selections to MySQL, and returns an order confirmation with a unique tracking number.
+
+## Features
+
+- Entity classes and an enum modeled to match a provided UML diagram, mapped to a MySQL database via Spring Data JPA
+- Repository interfaces for each entity extending `JpaRepository`, with cross-origin support for the Angular front end
+- Service layer including a purchase data class (customer cart and cart items), a purchase response class returning a unique order tracking number, and a checkout service interface/implementation handling order logic
+- Dynamic price calculation based on party size and selected excursions, reflected live in the cart summary before checkout
+- Input validation enforcing the constraints expected by the Angular front end
+- A REST checkout controller exposing a POST endpoint for placing orders, verified error-free via browser network inspection
+- Five sample customers seeded programmatically at startup, without overwriting existing data on repeated runs, plus support for adding new customers directly from the front end
+- Order data (customer, cart, cart items, excursions) persisted to MySQL via MySQL Workbench after checkout
+
+## Tech Stack
+
+- Java, Spring Boot, Spring Data JPA, Spring Data REST
+- MySQL
+- Lombok
+- Angular (provided front end, not modified)
 
 
-## SUPPLEMENTAL RESOURCES  
-1.	How to clone a project to IntelliJ using Git?
+### Booking flow - cart summary through checkout:
 
-> Ensure that you have Git installed on your system and that IntelliJ is installed using [Toolbox](https://www.jetbrains.com/toolbox-app/). Make sure that you are using version 2022.3.2. Once this has been confirmed, click the clone button and use the 'IntelliJ IDEA (HTTPS)' button. This will open IntelliJ with a prompt to clone the proejct. Save it in a safe location for the directory and press clone. IntelliJ will prompt you for your credentials. Enter in your WGU Credentials and the project will be cloned onto your local machine.  
+![Cart Summary](screenshots/cart-summary.png)
+![Order Confirmation](screenshots/order-confirmation.png)
 
-2. How to create a branch and start Development?
+**Verified clean network activity (no errors) on order submission:**
 
-- GitLab method
-> Press the '+' button located near your branch name. In the dropdown list, press the 'New branch' button. This will allow you to create a name for your branch. Once the branch has been named, you can select 'Create Branch' to push the branch to your repository.
+![Network Tab](screenshots/network-tab-no-errors.png)
 
-- IntelliJ method
-> In IntelliJ, Go to the 'Git' button on the top toolbar. Select the new branch option and create a name for the branch. Make sure checkout branch is selected and press create. You can now add a commit message and push the new branch to the local repo.
+**Database records confirming the order was persisted (MySQL Workbench):**
 
-## SUPPORT
-If you need additional support, please navigate to the course page and reach out to your course instructor.
-## FUTURE USE
-Take this opportunity to create or add to a simple resume portfolio to highlight and showcase your work for future use in career search, experience, and education!
+![Customers Table](screenshots/db-customers.png)
+![Carts Table](screenshots/db-carts.png)
+![Cart Items Table](screenshots/db-cart-items.png)
+![Excursion Cart Items Table](screenshots/db-excursion-cartitem.png)
 
