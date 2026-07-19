@@ -8,25 +8,80 @@ The finished application allows a user browse available vacation packages, add a
 
 ## Features
 
-- Entity classes and an enum modeled to match a provided UML diagram, mapped to a MySQL database via Spring Data JPA
-- Repository interfaces for each entity extending `JpaRepository`, with cross-origin support for the Angular front end
-- Service layer including a purchase data class (customer cart and cart items), a purchase response class returning a unique order tracking number, and a checkout service interface/implementation handling order logic
-- Dynamic price calculation based on party size and selected excursions, reflected live in the cart summary before checkout
-- Input validation enforcing the constraints expected by the Angular front end
-- A REST checkout controller exposing a POST endpoint for placing orders, verified error-free via browser network inspection
-- Five sample customers seeded programmatically at startup, without overwriting existing data on repeated runs, plus support for adding new customers directly from the front end
-- Order data (customer, cart, cart items, excursions) persisted to MySQL via MySQL Workbench after checkout
+### Backend Architecture
 
+- Entity classes modeled from the provided UML
+
+- Enum for divisions/countries
+
+- JPA/Hibernate mappings to MySQL
+
+- Repository interfaces extending JpaRepository
+
+- Cross‑origin support for Angular (@CrossOrigin("*"))
+
+- Service layer implementing full purchase + checkout logic
+
+- Automatic tracking number generation
+
+- Input validation matching Angular expectations
+
+### Checkout Logic
+
+- Dynamic price calculation based on:
+
+  - Party size
+
+  - Selected excursions
+
+- Cart summary updates live in Angular
+
+- Backend persists:
+
+  - Customer
+
+  - Cart
+
+  - Cart items
+
+ - Excursion selections
+
+### Database Behavior
+
+- Five sample customers seeded at startup
+
+- No duplicate customer creation on repeated runs
+
+- Full order persistence verified via MySQL Workbench
+  
 ## Tech Stack
 
-- Java, Spring Boot, Spring Data JPA, Spring Data REST
+- Java 17+
+-  Spring Boot (Spring Data JPA, REST Reopsitories)
+-  Hibernate
 - MySQL
 - Lombok
-- Angular (provided front end, not modified)
+- Angular Front-End (provided by WGU)
+
+## Requirements Summary (From WGU Task)
+
+- Create Spring Boot project with required dependencies 
+
+- Build packages: controllers, entities, dao, services, config
+
+- Implement entities matching UML
+
+- Implement repositories
+
+- Implement service layer (checkout + purchase flow)
+
+- Connect to MySQL
+
+- Integrate with Angular front-end
 
 
-## Order Flow
-An order was placed for a vacation package with two excursions using the unmodified Angular front end. The screenshots below show the completed order generating no network errors, along with the resulting database records in MySQL Workbench confirming the data was saved successfully.
+## Checkout Flow
+An order was placed for a vacation package with two excursions using the unmodified Angular front end. The images below show the completed order generating no network errors, along with the resulting database records in MySQL Workbench confirming the data was saved successfully.
 
 ![Vacations](images/vacations.png)
 
