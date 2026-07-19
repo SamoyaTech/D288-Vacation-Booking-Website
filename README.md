@@ -25,19 +25,46 @@ The finished application allows a user browse available vacation packages, add a
 - Angular (provided front end, not modified)
 
 
-### Booking flow - cart summary through checkout:
+## Order Flow
+An order was placed for a vacation package with two excursions using the unmodified Angular front end. The screenshots below show the completed order generating no network errors, along with the resulting database records in MySQL Workbench confirming the data was saved successfully.
 
-![Cart Summary](screenshots/cart-summary.png)
-![Order Confirmation](screenshots/order-confirmation.png)
+![Vacations](images/vacations.png)
+
+---
+
+![Select Excursion](images/select-excursion.png)
+
+---
+
+![Excursions](images/excursions.png)
+
+---
+
+![Cart Summary](images/cart-summary.PNG)
+
+
+---
 
 **Verified clean network activity (no errors) on order submission:**
 
-![Network Tab](screenshots/network-tab-no-errors.png)
+
+![Network Tab](images/network-tab-no-errors.PNG)
+
+
 
 **Database records confirming the order was persisted (MySQL Workbench):**
 
-![Customers Table](screenshots/db-customers.png)
-![Carts Table](screenshots/db-carts.png)
-![Cart Items Table](screenshots/db-cart-items.png)
-![Excursion Cart Items Table](screenshots/db-excursion-cartitem.png)
+![Customers Table](images/db-customers.PNG)
+
+---
+
+![Carts Table](images/db-carts.PNG)
+
+---
+
+![Cart Items Table](images/db-cart-items.PNG)
+
+---
+
+![Excursion Cart Items Table](images/db-excursion-cart-item.PNG)
 
